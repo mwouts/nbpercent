@@ -1,0 +1,31 @@
+name: nbpercent-dev
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  # Jupyter
+  - python>=3.6
+  - jupyterlab>=3.0.13
+  - nbformat>=5.1.2
+  - nb_conda_kernels
+  # Pytest
+  - pytest
+  - pytest-xdist
+  - pytest-randomly
+  - pytest-cov
+  # Pre-commit
+  - pre-commit
+  # Sample notebooks
+  - pandas
+  - matplotlib
+  - plotly
+  # Altair
+  - altair
+  - vega_datasets
+  # ipywidgets
+  - ipywidgets
+  - jupyterlab_widgets
+  # itables
+  - pip
+  - pip:
+      - itables
