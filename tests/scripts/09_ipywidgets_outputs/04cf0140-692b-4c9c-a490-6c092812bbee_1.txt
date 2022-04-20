@@ -1,0 +1,1 @@
+FloatSlider(value=0.0)

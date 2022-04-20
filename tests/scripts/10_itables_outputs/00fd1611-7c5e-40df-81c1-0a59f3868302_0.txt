@@ -1,0 +1,53 @@
+      id iso2Code                                               name  \
+0    ABW       AW                                              Aruba   
+1    AFE       ZH                        Africa Eastern and Southern   
+2    AFG       AF                                        Afghanistan   
+3    AFR       A9                                             Africa   
+4    AFW       ZI                         Africa Western and Central   
+..   ...      ...                                                ...   
+294  XZN       A5  Sub-Saharan Africa excluding South Africa and ...   
+295  YEM       YE                                        Yemen, Rep.   
+296  ZAF       ZA                                       South Africa   
+297  ZMB       ZM                                             Zambia   
+298  ZWE       ZW                                           Zimbabwe   
+
+                         region  \
+0    Latin America & Caribbean    
+1                    Aggregates   
+2                    South Asia   
+3                    Aggregates   
+4                    Aggregates   
+..                          ...   
+294                  Aggregates   
+295  Middle East & North Africa   
+296         Sub-Saharan Africa    
+297         Sub-Saharan Africa    
+298         Sub-Saharan Africa    
+
+                                           adminregion          incomeLevel  \
+0                                                  NaN          High income   
+1                                                  NaN           Aggregates   
+2                                           South Asia           Low income   
+3                                                  NaN           Aggregates   
+4                                                  NaN           Aggregates   
+..                                                 ...                  ...   
+294                                                NaN           Aggregates   
+295  Middle East & North Africa (excluding high inc...           Low income   
+296         Sub-Saharan Africa (excluding high income)  Upper middle income   
+297         Sub-Saharan Africa (excluding high income)  Lower middle income   
+298         Sub-Saharan Africa (excluding high income)  Lower middle income   
+
+        lendingType capitalCity  longitude  latitude  
+0    Not classified  Oranjestad   -70.0167   12.5167  
+1        Aggregates         NaN        NaN       NaN  
+2               IDA       Kabul    69.1761   34.5228  
+3        Aggregates         NaN        NaN       NaN  
+4        Aggregates         NaN        NaN       NaN  
+..              ...         ...        ...       ...  
+294      Aggregates         NaN        NaN       NaN  
+295             IDA      Sana'a    44.2075   15.3520  
+296            IBRD    Pretoria    28.1871  -25.7460  
+297             IDA      Lusaka    28.2937  -15.3982  
+298           Blend      Harare    31.0672  -17.8312  
+
+[299 rows x 10 columns]
