@@ -98,6 +98,12 @@ Note that [our examples](https://github.com/mwouts/nbpercent/tree/main/examples)
 
 Streams (bash commands) and Exceptions will also be supported, see the [other examples](https://github.com/mwouts/nbpercent/tree/main/examples/percent_with_outputs).
 
+## Sample diffs
+
+This text format makes changes easier to read. See for instance how a [commit](https://github.com/mwouts/nbpercent/commit/b125e66b0de981a47b39b0dc5e9e8237b4957181) on an `ipynb` file that involves an update in the matplotlib plot becomes [readable ](https://github.com/mwouts/nbpercent/commit/38b3a8be3d114163e619d48542632455aa56baea) on the text plus outputs representation of the notebook:
+
+![](sample_diff.png)
+
 ## Advanced features
 
 ### Metadata, cell ids, execution count
