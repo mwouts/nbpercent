@@ -56,6 +56,28 @@ def cell_header(cell):
 
 def write_output(output, output_count, notebook_path, cell_id):
     output = copy(output)
+    out_prefix = f"{COMMENT_CHAR} {chr(171)}{chr(187)}"
+
+    def export_to_file(output, key, extension):
+        output_file = f"{cell_id}_{output_count}.{extension}"
+        output_folder = notebook_path.parent / (notebook_path.stem + "_outputs")
+        output_folder.mkdir(exist_ok=True)
+        output_path = output_folder / output_file
+        output_path.write_text(output[key])
+        output[key] = output_file
+
+    def encode_output(output):
+        return [out_prefix] + comment_out(yaml.safe_dump(as_dict(output)).splitlines())
+
+    if output["output_type"] == "stream":
+        export_to_file(output, "text", extension="stream")
+        return encode_output(output)
+
+    if output["output_type"] == "error":
+        output["traceback"] = "\n".join(output["traceback"]) + "\n"
+        export_to_file(output, "traceback", extension="traceback")
+        return encode_output(output)
+
     data = output["data"]
     execution_count = output.pop("execution_count", None)
 
@@ -70,8 +92,6 @@ def write_output(output, output_count, notebook_path, cell_id):
     else:
         if output["output_type"] == "display_data":
             del output["output_type"]
-
-        out_prefix = f"{COMMENT_CHAR} {chr(171)}{chr(187)}"
 
     # single small output are inlined
     if (
@@ -90,18 +110,12 @@ def write_output(output, output_count, notebook_path, cell_id):
         else:
             extension = OUTPUT_EXTENSIONS[key]
 
-        output_file = f"{cell_id}_{output_count}.{extension}"
-        output_folder = notebook_path.parent / (notebook_path.stem + "_outputs")
-        output_folder.mkdir(exist_ok=True)
-        output_path = output_folder / output_file
-
         if isinstance(value, NotebookNode):
-            value = json.dumps(as_dict(value))
+            data[key] = json.dumps(as_dict(value))
 
-        output_path.write_text(value)
-        data[key] = str(output_file)
+        export_to_file(data, key, extension)
 
-    return [out_prefix] + comment_out(yaml.safe_dump(as_dict(output)).splitlines())
+    return encode_output(output)
 
 
 def write(notebook, notebook_path):
