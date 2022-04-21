@@ -28,9 +28,7 @@ setup_args = dict(
     url="https://github.com/mwouts/nbpercent",
     packages=find_packages(exclude=["tests"]),
     tests_require=["pytest"],
-    install_requires=[
-        "nbformat>=5.1.0",
-    ],
+    install_requires=["nbformat>=5.1.0", "pyyaml"],
     python_requires=">=3.6",
     license="MIT",
     classifiers=[
