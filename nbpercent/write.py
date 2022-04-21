@@ -27,7 +27,9 @@ def as_dict(metadata):
 
 
 def notebook_header(metadata):
-    return comment_out(['---'] + yaml.safe_dump(as_dict(metadata)).splitlines()+['---'])
+    return comment_out(
+        ["---"] + yaml.safe_dump({"jupyter": as_dict(metadata)}).splitlines() + ["---"]
+    )
 
 
 def cell_header(cell):
@@ -76,7 +78,7 @@ def write_output(output, output_count, notebook_path, cell_id):
         set(output.keys()) == {"data"}
         and set(data.keys()) == {"text/plain"}
         and len(data["text/plain"]) < 75
-        and '\n' not in data["text/plain"]
+        and "\n" not in data["text/plain"]
     ):
         return [f"{out_prefix} {data['text/plain']}"]
 
@@ -99,7 +101,7 @@ def write_output(output, output_count, notebook_path, cell_id):
         output_path.write_text(value)
         data[key] = str(output_file)
 
-    return [out_prefix]+ comment_out(yaml.safe_dump(as_dict(output)).splitlines())
+    return [out_prefix] + comment_out(yaml.safe_dump(as_dict(output)).splitlines())
 
 
 def write(notebook, notebook_path):
