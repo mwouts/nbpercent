@@ -27,7 +27,7 @@ def as_dict(metadata):
 
 
 def notebook_header(metadata):
-    return comment_out(yaml.safe_dump(as_dict(metadata)).splitlines())
+    return comment_out(['---'] + yaml.safe_dump(as_dict(metadata)).splitlines()+['---'])
 
 
 def cell_header(cell):
@@ -60,21 +60,25 @@ def write_output(output, output_count, notebook_path, cell_id):
     if not output["metadata"]:
         del output["metadata"]
 
-    if output["output_type"] == "execute_result":
-        del output["output_type"]
-
     if execution_count is not None:
-        out_prefix = f"{COMMENT_CHAR} Out[{execution_count}]:"
+        if output["output_type"] == "execute_result":
+            del output["output_type"]
+
+        out_prefix = f"{COMMENT_CHAR} {chr(171)}{execution_count}{chr(187)}"
     else:
-        out_prefix = f"{COMMENT_CHAR} Out:"
+        if output["output_type"] == "display_data":
+            del output["output_type"]
+
+        out_prefix = f"{COMMENT_CHAR} {chr(171)}{chr(187)}"
 
     # single small output are inlined
     if (
         set(output.keys()) == {"data"}
         and set(data.keys()) == {"text/plain"}
         and len(data["text/plain"]) < 75
+        and '\n' not in data["text/plain"]
     ):
-        return f"{out_prefix} {data['text/plain']}"
+        return [f"{out_prefix} {data['text/plain']}"]
 
     # other outputs are exported to the disk
     for key, value in data.items():
@@ -95,7 +99,7 @@ def write_output(output, output_count, notebook_path, cell_id):
         output_path.write_text(value)
         data[key] = str(output_file)
 
-    return f"{out_prefix} {json.dumps(output)}"
+    return [out_prefix]+ comment_out(yaml.safe_dump(as_dict(output)).splitlines())
 
 
 def write(notebook, notebook_path):
@@ -118,7 +122,7 @@ def write(notebook, notebook_path):
 
             # add outputs
             for output_count, output in enumerate(cell.outputs):
-                script.append(
+                script.extend(
                     write_output(
                         output=output,
                         output_count=output_count,
