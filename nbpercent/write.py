@@ -1,3 +1,4 @@
+import base64
 import json
 from copy import copy
 from pathlib import Path
@@ -58,12 +59,15 @@ def write_output(output, output_count, notebook_path, cell_id):
     output = copy(output)
     out_prefix = f"{COMMENT_CHAR} {chr(171)}{chr(187)}"
 
-    def export_to_file(output, key, extension):
+    def export_to_file(output, key, extension, b64decode=False):
         output_file = f"{cell_id}_{output_count}.{extension}"
         output_folder = notebook_path.parent / (notebook_path.stem + "_outputs")
         output_folder.mkdir(exist_ok=True)
         output_path = output_folder / output_file
-        output_path.write_text(output[key])
+        if b64decode:
+            output_path.write_bytes(base64.b64decode(output[key]))
+        else:
+            output_path.write_text(output[key])
         output[key] = output_file
 
     def encode_output(output):
@@ -113,7 +117,7 @@ def write_output(output, output_count, notebook_path, cell_id):
         if isinstance(value, NotebookNode):
             data[key] = json.dumps(as_dict(value))
 
-        export_to_file(data, key, extension)
+        export_to_file(data, key, extension, b64decode=(key == "image/png"))
 
     return encode_output(output)
 
