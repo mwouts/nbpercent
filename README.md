@@ -15,8 +15,6 @@ The purpose of this proposal is to
 - identify possible sponsors for the project (I would like to get funding for working on this)
 - identify technical correspondents to ease future integration with the main notebook editors (i.e. Jupyter, VS Code, PyCharm Professional)
 
-If you would like to help with the project, please contact me - my email is on [my GitHub account](https://github.com/mwouts/).
-
 ## Proposed scope
 
 - The percent format with outputs works for all up-to-date notebooks (cell ids are required i.e. notebook format should be at least 4.5)
@@ -88,15 +86,15 @@ Markdown("**bold**")
 
 ### More output types
 
-I plan to store HTML, PNG, JSON outputs (etc) in files with the expected extension.
+We store HTML, PNG and JSON outputs in files with the expected extension.
 
-The [06_matplotlib.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/06_matplotlib.py) notebook is an example that has [PNG outputs](https://github.com/mwouts/nbpercent/tree/main/examples/percent_with_outputs/06_matplotlib_outputs/cb1418f2-dfee-4345-a26f-d6775c93fb4e_0.png)
+The [06_matplotlib.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/06_matplotlib.py) notebook is an example that has [PNG outputs](https://github.com/mwouts/nbpercent/tree/main/examples/percent_with_outputs/06_matplotlib_outputs/cb1418f2-dfee-4345-a26f-d6775c93fb4e_0.png).
 
-The [07_plotly.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/07_plotly.py) notebook is an example that has [HTML, JSON and PNG outputs](https://github.com/mwouts/nbpercent/tree/main/examples/percent_with_outputs/07_plotly_outputs)
+The [07_plotly.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/07_plotly.py) notebook is an example that has [HTML, JSON and PNG outputs](https://github.com/mwouts/nbpercent/tree/main/examples/percent_with_outputs/07_plotly_outputs).
 
-We have tested Altair HTML plots at [08_altair.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/08_altair.py)) and their [HTML output](https://github.com/mwouts/nbpercent/tree/main/examples/percent_with_outputs/08_altair_outputs), and [08_altair.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/08_altair.py)).
+We have tested Altair HTML plots at [08_altair.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/08_altair.py) and their [HTML output](https://github.com/mwouts/nbpercent/tree/main/examples/percent_with_outputs/08_altair_outputs), and [08_altair.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/08_altair.py).
 
-Note that [our examples](https://github.com/mwouts/nbpercent/tree/main/examples) include widgets and Javascript outputs.
+Note that [our examples](https://github.com/mwouts/nbpercent/tree/main/examples) also include [ipywidgets](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/09_ipywidgets.py) and [Javascript](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/10_itables_outputs/c5dfd916-da57-4d47-8111-ceb648afc0cd_0.js) outputs.
 
 Streams (bash commands) and Exceptions will also be supported, see the [other examples](https://github.com/mwouts/nbpercent/tree/main/examples/percent_with_outputs).
 
@@ -110,11 +108,11 @@ Maybe we could give an option to export the execution count to a dedicated file 
 
 ### Cell attachments
 
-Cell attachments are not outputs, but they should be supported (maybe in another folder `{notebook_name}_attachments` to avoid conflicts with outputs)
+Cell attachments are not outputs, but they should be supported (maybe in another folder `{notebook_name}_attachments` to avoid conflicts with outputs).
 
 ### Active and inactive cells
 
-The `active-py` and `active-ipynb` cell tags of Jupytext should be supported. And the bash commands should be escaped like they are in Jupytext.
+The `active-py` and `active-ipynb` cell tags of Jupytext that let the user decide whether a code cell should be commented out in the `.py` file should be supported. And the bash commands like `!echo` should be commented out like they are in Jupytext.
 
 ### Python specific formatting
 
@@ -123,3 +121,7 @@ The number of blank lines introduced after code cells should depend on whether t
 ### Cleanup the output folder
 
 Files that corresponds to outputs that are not anymore in the notebook should be deleted when the notebook is saved (and the folder deleted when the notebook has no outputs).
+
+## Get in touch!
+
+If you would like to help with the project and contribute either funding or support, please contact me. You will find my email on [my GitHub account](https://github.com/mwouts/).
