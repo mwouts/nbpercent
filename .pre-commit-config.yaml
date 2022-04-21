@@ -12,8 +12,7 @@
 # the text representation of the test notebooks unchanged
 exclude: >
     (?x)^(
-      demo/.*|
-      tests/scripts/.*|
+      examples/.*|
     )$
 repos:
 

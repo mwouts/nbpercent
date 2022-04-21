@@ -8,12 +8,12 @@ Notebooks are complex objects as they combine the user input (text or code cells
 
 This causes difficulties for version control and/or manual edition of the documents (outside of the classical notebook editors).
 
-What we propose here is to implement a format for Jupyter Notebooks as _percent scripts with outputs_, based on the experience that we gathered in [Jupytext](jupytext.readthedocs.io/) with the percent script format (with no outputs).
+What we propose here is to implement a format for Jupyter Notebooks as _percent scripts with outputs_, based on the experience that we gathered in [Jupytext](https://jupytext.readthedocs.io) with the percent script format (with no outputs).
 
 The purpose of this proposal is to
 - set a few guidelines for a possible implementation
 - identify possible sponsors for the project (I would like to get funding for working on this)
-- identify technical correspondants to ease future integration with the main notebook editors (i.e. Jupyter, VS Code, PyCharm Professional)
+- identify technical correspondents to ease future integration with the main notebook editors (i.e. Jupyter, VS Code, PyCharm Professional)
 
 If you would like to help with the project, please contact me - my email is on [my GitHub account](https://github.com/mwouts/).
 
@@ -23,27 +23,27 @@ If you would like to help with the project, please contact me - my email is on [
 - All output types are supported
 - The implementation is done in Python, but the format works for any language (we just need to know what is the single line comment char)
 - Enough examples are provided to allow easy re-implementation in other languages (e.g. TypeScript for VS Code or Jupyter Lab)
-- This format is implemented either in Jupytext, or in a standalone library. The sponsor choses the licence and organisation.
+- This format is implemented either in Jupytext, or in a standalone library. The sponsor chooses the licence and organisation.
 
 ## Sample outputs in a Jupyter Notebook
 
 ### No outputs
 
-Sometime `cell.outputs = []`, i.e. there are not outputs. In such a case we would just code the code cell as a standard percent cell, e.g.
+Sometime `cell.outputs = []`, i.e. there is no outputs. In such a case we would just code the code cell as a standard percent cell, e.g.
 
 ```python
 # %% e57e3703-0a89-4dd7-b906-2304c8d32df7
 x = 5
 ```
 
-Note that `e57e3703-0a89-4dd7-b906-2304c8d32df7` is the _cell id_. The user will be able to edit the cell ids in the text notebook, and we also plan to provide an utility that will programmatically rename cell ids to more friendly names like `unnamed_code_cell_1`.
+Note that `e57e3703-0a89-4dd7-b906-2304c8d32df7` is the _cell id_. The user will be able to edit the cell ids in the text notebook, and we also plan to provide a utility that will programmatically rename cell ids to more friendly names like `unnamed_code_cell_1`.
 
-A sample notebook with no output is available here: [00_no_output.py](https://github.com/mwouts/nbpercent/blob/main/tests/scripts/00_no_output.py)
+A sample notebook with no output is available here: [00_no_output.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/00_no_output.py)
 
 
 ### Simple and short text
 
-Short text outputs should be inlined in the text notebook as in [01_simple_output.py](https://github.com/mwouts/nbpercent/blob/main/tests/scripts/01_simple_output.py)
+Short text outputs should be inlined in the text notebook as in [01_simple_output.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/01_simple_output.py)
 
 ```python
 # %% aca6afe8-eb2f-45c7-bd16-35e48e1f43e4
@@ -54,7 +54,7 @@ Short text outputs should be inlined in the text notebook as in [01_simple_outpu
 
 ### Long or multiline text
 
-Long or multiline text outputs are exported to text files like in [01b_long_output.py](https://github.com/mwouts/nbpercent/blob/main/tests/scripts/01b_long_output.py)
+Long or multiline text outputs are exported to text files like in [01b_long_output.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/01b_long_output.py)
 
 ```python
 # %% aca6afe8-eb2f-45c7-bd16-35e48e1f43e4
@@ -65,14 +65,14 @@ Long or multiline text outputs are exported to text files like in [01b_long_outp
 #   text/plain: aca6afe8-eb2f-45c7-bd16-35e48e1f43e4_0.txt
 ```
 
-And the content of the [`txt` file](https://github.com/mwouts/nbpercent/blob/main/tests/scripts/01b_long_output_outputs/aca6afe8-eb2f-45c7-bd16-35e48e1f43e4_0.txt) is simply the output of the command:
+And the content of the [`txt` file](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/01b_long_output_outputs/aca6afe8-eb2f-45c7-bd16-35e48e1f43e4_0.txt) is simply the output of the command:
 ```
 'very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very long text'
 ```
 
 ### Markdown output
 
-Markdown outputs are exported to [`.md` files](https://github.com/mwouts/nbpercent/blob/main/tests/scripts/02_markdown_outputs/03220820-56d9-4e56-a8c7-90244408ea8e_0.md) like here in [02_markdown.py](https://github.com/mwouts/nbpercent/blob/main/tests/scripts/02_markdown.py)
+Markdown outputs are exported to [`.md` files](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/02_markdown_outputs/03220820-56d9-4e56-a8c7-90244408ea8e_0.md) like here in [02_markdown.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/02_markdown.py)
 
 ```python
 # %% 03220820-56d9-4e56-a8c7-90244408ea8e
@@ -90,7 +90,15 @@ Markdown("**bold**")
 
 I plan to store HTML, PNG, JSON outputs (etc) in files with the expected extension.
 
-The [07_plotly.py](https://github.com/mwouts/nbpercent/blob/main/tests/scripts/07_plotly.py) notebook is a great example that has [HTML, JSON and PNG outputs](https://github.com/mwouts/nbpercent/tree/main/tests/scripts/07_plotly_outputs)
+The [06_matplotlib.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/06_matplotlib.py) notebook is an example that has [PNG outputs](https://github.com/mwouts/nbpercent/tree/main/examples/percent_with_outputs/06_matplotlib_outputs/cb1418f2-dfee-4345-a26f-d6775c93fb4e_0.png)
+
+The [07_plotly.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/07_plotly.py) notebook is an example that has [HTML, JSON and PNG outputs](https://github.com/mwouts/nbpercent/tree/main/examples/percent_with_outputs/07_plotly_outputs)
+
+We have tested Altair HTML plots at [08_altair.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/08_altair.py)) and their [HTML output](https://github.com/mwouts/nbpercent/tree/main/examples/percent_with_outputs/08_altair_outputs), and [08_altair.py](https://github.com/mwouts/nbpercent/blob/main/examples/percent_with_outputs/08_altair.py)).
+
+Note that [our examples](https://github.com/mwouts/nbpercent/tree/main/examples) include widgets and Javascript outputs.
+
+Streams (bash commands) and Exceptions will also be supported, see the [other examples](https://github.com/mwouts/nbpercent/tree/main/examples/percent_with_outputs).
 
 ## Advanced features
 
@@ -114,4 +122,4 @@ The number of blank lines introduced after code cells should depend on whether t
 
 ### Cleanup the output folder
 
-Files that corresponds to outputs that are not any more in the notebook should be deleted when the notebook is saved (and the folder deleted when the notebook has no outputs).
+Files that corresponds to outputs that are not anymore in the notebook should be deleted when the notebook is saved (and the folder deleted when the notebook has no outputs).
