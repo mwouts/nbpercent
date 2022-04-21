@@ -115,7 +115,7 @@ def write_output(output, output_count, notebook_path, cell_id):
             extension = OUTPUT_EXTENSIONS[key]
 
         if isinstance(value, NotebookNode):
-            data[key] = json.dumps(as_dict(value))
+            data[key] = json.dumps(as_dict(value), indent=4, sort_keys=True)
 
         export_to_file(data, key, extension, b64decode=(key == "image/png"))
 
